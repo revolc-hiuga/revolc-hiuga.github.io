@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>20261005</title>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <h1>做题记录 第1题</h1>
+
+        设函数 \(f_n(x) = -1+x+\dfrac{x^2}{2^2}+\dfrac{x^3}{3^2}+\cdots+\dfrac{x^n}{n^2} (x \in \mathbb{R}, n \in \mathbb{N}^{*}).\) <br/> <br/>
+        1. 证明：对每个 \(n \in \mathbb{N}^{*},\) 存在唯一的 \(x_n \in \left[ \dfrac{2}{3}, 1 \right],\) 满足 \(f_n(x_n) = 0.\) <br/>
+        2. 证明：对任意 \(p \in \mathbb{N}^{*},\) 由 (1) 中 \(x_n\) 构成的数列 \(\{x_n\}\) 满足 \(0 < x_n - x_{n+p} < \dfrac{1}{n}.\) <br/> <br/>
+
+        <hr/>
+
+        <br/>
+        开始第一问。<br/> <br/>
+
+        原式可以写作：\(f_n(x) = -1+\sum^n_{k=1} \dfrac{x^k}{k^2} (n \in \mathbb{N}^{*}).\) <br/>
+        求 \(f_n(x)\) 的导数。其导数是：\(f'_n(x) = \sum^n_{k=1} \dfrac{kx^{k-1}}{2k} (n \in \mathbb{N}^{*}).\) 显然，这个函数在区间 \(x_n \in \left[ \dfrac{2}{3}, 1 \right]\) 内恒正。\(f_n(x)\) 在该区间内单调递增。<br/> <br/>
+        要证明存在零点 \(x_n\), 只需要证明：\(f_n \left( \dfrac{2}{3} \right) < 0,\) 及 \(f_n(1) > 0.\) 其中后一个结论是极其显然的。\(\left( f_n(1) = -1+\sum^n_{k=1} \dfrac{1}{k^2} \geqslant -1+1 = 0 \right)\) <br/> <br/>
+
+        要证前一个结论，稍作变形，则等价于证明：\(\sum^n_{k=1} \dfrac{(2/3)^k}{k^2} < 1.\) <br/>
+        我们尝试证明：\(\sum^n_{k=1} \left( \dfrac{2}{3} \right)^{k} < 1.\) 为什么要如此变形呢？显然，\(\sum^n_{k=1} \dfrac{(2/3)^k}{k^2} < \sum^n_{k=1} \left( \dfrac{2}{3} \right)^{k}\) 是显而易见的，而后者为等比数列求和，容易计算。<br/> <br/>
+        计算，得到：\(\sum^n_{k=1} \left( \dfrac{2}{3} \right)^{k} = \dfrac{2(3^n-2^n)}{3^n} < 1.\) 但是，这个式子当 \(n = 2\) 时不成立。\(\left( \dfrac{2\times(9-4)}{9} = \dfrac{10}{9} > 1 \right)\) <br/> <br/> <br/>
+
+        不过这个思路（通过不等式放缩的形式，逐渐逼近所求范围）是可行的。<br/> <br/>
+        我们发现：\(\sum^n_{k=1} \dfrac{(2/3)^k}{k^2} = \dfrac{2}{3} + \sum^n_{k=2} \dfrac{(2/3)^k}{k^2} (n \geqslant 2)\). 而 \(\sum^n_{k=2} \dfrac{(2/3)^k}{k^2} < \sum^n_{k=2} \dfrac{(2/3)^k}{4}.\) 所以我们可以尝试证明 \(\sum^n_{k=2} \dfrac{(2/3)^k}{4} < \dfrac{1}{3}.\) <br/> <br/>
+        （这里我们需要单独处理 \(n=1\) 的情况。当 \(n = 1\) 时，\(f_1 \left( \dfrac{2}{3} \right) = -1+\dfrac{2}{3} = -\dfrac{1}{3} < 0.\) 满足条件。）<br/> <br/>
+        计算，得到：\(\sum^n_{k=2} \dfrac{(2/3)^k}{4} = \dfrac{3^{n-1}-2^{n-1}}{3^n} < \dfrac{1}{3}.\) 变形，得到：\(3^{n-1}-2^{2^n-1} < 3^{n-1}.\) 显然成立。证明结束。<br/> <br/> 
+
+        <hr/>
+
+        <br/>
+        开始第二问。<br/> <br/>
+
+        首先读懂题目的意思。\(x_n\) 代表 \(f_n(x)\) 的零点。题目要求证明，对于任意的 \(n,\) 当 \(p\) 增大时，\(f_n(x)\) 的零点始终大于 \(f_{n+p}(x)\) 的零点，且两者的差值小于 \(\dfrac{1}{n}.\) <br/>
+        先证不等式左边，即证明 \(f_n(x)\) 的零点大于 \(f_{n+p}(x)\) 的零点。结合单调性结论可得，这等价于证明 \(f_{n+p}(x_n) > 0.\) <br/> <br/>
+        显然，\(f_{n+p}(x) = \sum^{n+p}_{k=1} \dfrac{x^k}{k^2} = \sum^n_{k=1} \dfrac{x^k}{k^2} + \sum^{n+p}_{k=n+1} \dfrac{x^k}{k^2} = f_n(x) + \sum^{n+p}_{k=n+1} \dfrac{x^k}{k^2}.\) 由题可得，\(f_n(x_n) = 0\), 所以 \(f_{n+p}(x_{n}) = \sum^{n+p}_{k=n+1} \dfrac{x_n^k}{k^2} > 0.\) <br/> <br/> <br/>
+
+        再证不等式右边。以下内容我参考了 drifter_飘零的解析。<br/>
+        考察 \(f_n(x_n)-f_{n+p}(x_{n+p})\), 有：
+        $$
+        f_n(x_n)-f_{n+p}(x_{n+p}) = \sum^n_{k=1} \dfrac{x_n^k}{k^2} - \sum^{n+p}_{j=1} \dfrac{x_{n+p}^j}{j^2} \\
+        = (x_n-x_{n+p}) - \left( \sum^{n+p}_{j=2} \dfrac{x_{n+p}^j}{j^2} - \sum^n_{k=2} \dfrac{x_n^k}{k^2} \right) = 0
+        $$
+
+        即 \(x_n-x_{n+p} = \sum^{n+p}_{j=2} \dfrac{x_{n+p}^j}{j^2} - \sum^n_{k=2} \dfrac{x_n^k}{k^2} = \sum^n_{k=2} \dfrac{x_{n+p}^k-x_n^k}{k^2} + \sum^{n+p}_{j=n+1} \dfrac{x_{n+p}^j}{j^2}.\) <br/> <br/>
+        因为 \(x_n > x_{n+p}\), 所以 \(x_{n+p}^k-x_n^k < 0.\) 要证明 \(x_n-x_{n+p} < \dfrac{1}{n},\) 只需要证明 \(\sum^{n+p}_{j=n+1} \dfrac{x_{n+p}^j}{j^2} < \dfrac{1}{n}.\) <br/> <br/>
+        因为 \(x_{n} \leqslant 1\), 所以 \(\sum^{n+p}_{j=n+1} \dfrac{x_{n+p}^j}{j^2} < \sum^{n+p}_{j=n+1} \dfrac{1}{j^2} < \sum^{n+p}_{j=n+1} \dfrac{1}{j(j-1)} = \dfrac{1}{n} - \dfrac{1}{n+p} < \dfrac{1}{n}.\) 显然成立。证明结束。
+
+    </body>
+</html>
